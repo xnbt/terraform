@@ -1,7 +1,5 @@
 pipeline{
-    agent {
-        label 'amz-linux' 
-    }
+    agent any
     tools {
           terraform 'my-terraform'
     }
