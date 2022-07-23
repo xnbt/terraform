@@ -7,15 +7,16 @@ pipeline{
         stage("Terraform checking"){
             steps{
                 echo "========Start checking Terraform========"
-                withCredentials([aws(credentialsId: 'aws-creds')]) { 
+		    dir("jenkins-node") {
+			    withCredentials([aws(credentialsId: 'aws-creds')]) { 
                     sh 'terraform --version'
                     sh '''
                         terraform init
                         terraform plan -no-color
 			terraform apply
                     '''
-                }
-
+		    }
+		    }
             }
         }
     }
